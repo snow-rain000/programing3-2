@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>BBS</title>
+</head>
+<body>
+    <form method="post" action="/new">
+        <input type="submit" value="戻る">
+    </form>
+    <h1><html><body><a href='/twitter/auth'>Twitter access start!!</a></body></html></h1>
+    <h1><html><body><a href='/twitter/auth'>Twitter access start!!</a></body></html></h1>
+    <h1>BBS</h1>
+    <ul>
+        <% @comments.each do |comment| %>
+        <li data-id="<%= comment.id %>">
+            <%= comment.body %>
+            <span class="deleteCmd" style="cursor:pointer;color:blue">[-]</span>
+        </li>
+        <% end %>
+    </ul>
+    <h2>Add New</h2>
+    <form method="post" action="/new">
+        <input type="text" name="body"> <input type="submit" value="comment!">
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+        $('.deleteCmd').click(function() {
+            var el = $(this).parent();
+            if (confirm('are you sure to delte?')) {
+                $.post('/delete', {
+                    id: el.data('id')
+                }, function() {
+                    el.fadeOut(800);
+                });
+             }
+        })
+    </script>
+</body>
+</html>
