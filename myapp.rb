@@ -51,7 +51,7 @@ end
 # Twitter Request authentication
 get '/twitter/auth' do
   # Appointname callback URL
-  callback_url = "http://133.13.60.165:4567/top"
+  callback_url = "http://133.13.60.165:4567/twitter/callback"
   request_token = oauth_consumer.get_request_token(oauth_callback: callback_url)
  
   # セッションにトークンを保存
@@ -60,7 +60,7 @@ get '/twitter/auth' do
   redirect request_token.authorize_url
 end
  
-# Twitterからトークンなどを受け取り
+# Take toke and etc.. from Twitter
 get '/twitter/callback' do
   request_token = OAuth::RequestToken.new(oauth_consumer, session[:request_token], session[:request_token_secret])
  
@@ -89,4 +89,5 @@ get '/twitter/callback' do
     puts "---------------"
 
     puts "Finish!"
+    redirect '/top'
 end
