@@ -77,7 +77,7 @@ get '/twitter/callback' do
   end
 
 
-# ログイン
+# login
     client = Twitter::REST::Client.new do |config|
         config.consumer_key        = YOUR_CONSUMER_KEY
         config.consumer_secret     = YOUR_CONSUMER_SECRET
@@ -85,6 +85,8 @@ get '/twitter/callback' do
         config.access_token_secret = access_token.secret
     end
     puts "---------------"
+    user = client.user
+    puts user.name
     puts access_token.secret 
     puts "---------------"
 
