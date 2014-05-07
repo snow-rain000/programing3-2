@@ -84,8 +84,13 @@ get '/twitter/callback' do
         config.access_token        = access_token.token
         config.access_token_secret = access_token.secret
     end
+
     puts "---------------"
     user = client.user
+    user_name = user.name
+    comment = Comment.new
+    comment.username = user_name
+    comment.save
     puts user.name
     puts access_token.secret 
     puts "---------------"
