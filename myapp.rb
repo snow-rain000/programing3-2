@@ -32,12 +32,13 @@ end
  
 # top page
 get '/' do
-  "<html><body><a href='/twitter/auth'>Twitter access start!!</a></body></html>"
+#   "<html><body><a href='/twitter/auth'>Twitter access start!!</a></body></html>"
+  erb :testIndex
 end
 
 get '/top' do
    @comments = Comment.order("id desc").all
-   erb :index
+   erb :bbs
 end
 
 post '/new' do
@@ -53,7 +54,7 @@ end
 # Twitter Request authentication
 get '/twitter/auth' do
   # Appointname callback URL
-  callback_url = "http://133.13.60.165:4567/twitter/callback"
+  callback_url = "http://127.0.1:4567/twitter/callback"
   request_token = oauth_consumer.get_request_token(oauth_callback: callback_url)
  
   # セッションにトークンを保存
