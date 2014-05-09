@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Boot_Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div id="header" class="col-sm-12" style="background:lightcyan;"><h1>Programming3 testpage</h1></div>
+
+      <div class="col-sm-6">
+        <div class="jumbotron">
+      	  <h1>BBS</h1>
+          <ul>
+            <% @comments.each do |comment| %>
+              <li data-id="<%= comment.id %>">
+              <%= comment.body %>
+              <span class="deleteCmd" style="cursor:pointer;color:blue">[*]</span>
+              </li>
+            <% end %>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="jumbotron">
+          <h1>add_text</h1>
+          <form method="post" action="/new">
+            <input type="text" name="test"> <input type="submit" value="comment!">
+          </form>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+          <script>
+             $('.deleteCmd').click(function() {
+               var el = $(this).parent();
+               if (confirm('are you sure to delte?')) {
+                 $.post('/delete', {
+                    id: el.data('id')
+                    }, function() {
+                    el.fadeOut(800);
+                  });
+                }
+              })
+            </script>
+
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="jumbotron">
+          <h1>title</h1>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="jumbotron">
+          <h1>title</h1>
+        </div>
+      </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+<!-- -->
