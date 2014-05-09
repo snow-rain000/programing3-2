@@ -18,7 +18,9 @@ class Comment < ActiveRecord::Base
 end
 
 # validation Session
-enable :sessions
+#enable :sessions
+use Rack::Session::Cookie, :secret => SecureRandom.hex(32),
+                  :expire_after => 60*60 # 1 min
  
 # Set up Twitter API
 YOUR_CONSUMER_KEY    = "YVNVCrq9Q0O2bXyVcQ5Rw"
@@ -86,7 +88,14 @@ get '/twitter/callback' do
     end
 
     puts "---------------"
-    user = client.user
+    
+    if session[:AcountName].nil? then
+      user = client.user
+      session[:AcountName] = user.name
+      puts session[:AcountName]
+    else
+      redirect '/top'
+    end
     user_name = user.name
     comment = Comment.new
     comment.username = user_name
