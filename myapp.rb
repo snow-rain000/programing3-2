@@ -41,6 +41,18 @@ get '/top' do
    erb :bbs
 end
 
+get '/test1' do
+  erb :test_link1
+end
+
+get '/test2' do
+  erb :test_link2
+end
+
+get '/test3' do
+  erb :test_link3
+end
+
 post '/new' do
    Comment.create({body: params[:test]})
    #Comment.create({:name => hoge})
