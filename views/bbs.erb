@@ -6,84 +6,92 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pro3</title>
-
+    
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    
   </head>
+  
   <body>
     <div class="container">
-    <div class="page-header">
       <div class="page-header">
-          <h1>  Programming3  <small><Div Align="right">Group6  　　田中　玉城　吉田</div></small></h1>
-        </div>
+        <h1>  Programming3  <small><Div Align="right">Group6  　　田中　玉城　吉田</div></small></h1>
+      </div>
     </div>
-
-
-
-          <div class="row">
-            <div class="col-7 col-sm-7 col-lg-7">
-              <h2>BBS</h2>
-          <ul>
-            <% @comments.each do |comment| %>
+    
+      
+    
+    <div class="row">
+      <div class="col-7 col-sm-7 col-lg-7">
+        <h2>BBS</h2>              
+        <div style="max-height:370px; overflow:auto;">
+          <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example">
+            <ul>
+              <% @comments.each do |comment| %>
               <li data-id="<%= comment.id %>">
-              <%= comment.body %>
-	      <span class="deleteCmd">
-		<a href="#" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus-sign"></i> delete</a>
-  </span><hr>
-        </li>
-            <% end %>
-          </ul>
-            </div><!--/span-->
-            
-            <div class="col-5 col-sm-5 col-lg-5">
-	<div class ="visible-xs"><hr></div>
-              <h2>Add_text</h2>
-  	<form method="post" action="/new">
-    	<div class="form-group">
-      	<label class="control-label" for="comment" >comment</label>
-      	<input type="text" name="test" class="form-control" placeholder="your comment">
-    	</div>
-    	<div class="form-group">
-      	<input type="submit" value="post" class="btn btn-primary">
-    	</div>
+                <%= comment.body %>
+                <span class="deleteCmd">
+                  <a href="#" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus-sign"></i> delete</a>
+                </span><hr>
+              </li>
+	      <% end %>
+            </ul>
+          </div>
+        </div>
+      </div><!--/span-->
+      
+      <div class="col-5 col-sm-5 col-lg-5">
+        <div class ="visible-xs"><hr></div>
+        <h2>Add_text</h2>
+        <form method="post" action="/new">
+    	  <div class="form-group">
+      	    <label class="control-label" for="comment" >comment</label>
+      	    <input type="text" name="test" class="form-control" placeholder="your comment">
+    	  </div>
+    	  <div class="form-group">
+      	    <input type="submit" value="post" class="btn btn-primary">
+    	  </div>
   	</form>
-
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-          <script>
-             $('.deleteCmd').click(function() {
-               var el = $(this).parent();
-               if (confirm('are you sure to delte?')) {
-                 $.post('/delete', {
-                    id: el.data('id')
-                    }, function() {
-                    el.fadeOut(800);
-                  });
-                }
-              })
-            </script>
-            
-            </div><!--/span-->
-            <div class="col-12 col-sm-12 col-lg-12">
-              <h2>Heading</h2>
-              <p><a href="test1">リンク1</a></p>
-              <p><a href="test2">リンク2</a></p>
-              <p><a href="test3">リンク3</a></p>
-            
-            </div><!--/span-->
-            <div class="col-12 col-sm-12 col-lg-12">
-            <hr>
-              <h2>links</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            </div><!--/span-->
-          </div><!--/row-->
-          <hr>
+	
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>
+          $('.deleteCmd').click(function() {
+            var el = $(this).parent();
+            if (confirm('are you sure to delte?')) {
+              $.post('/delete', {
+                id: el.data('id')
+                }, function() {
+                el.fadeOut(800);
+              });
+            }
+          })
+        </script>
+        
+      </div><!--/span-->
+      <div class="col-12 col-sm-12 col-lg-12">
+        <h2>Heading</h2>
+        <p><a href="test1">リンク1</a></p>
+        <p><a href="test2">リンク2</a></p>
+        <p><a href="test3">リンク3</a></p>
+        
+      </div><!--/span-->
+      <div class="col-12 col-sm-12 col-lg-12">
+        <hr>
+        <h2>links</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      </div><!--/span-->
+    </div><!--/row-->
+    <hr>
 </div><!--/container-->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
+
+
+
+</body>
 </html>
 <!-- -->
