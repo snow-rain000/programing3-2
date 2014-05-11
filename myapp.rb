@@ -128,7 +128,7 @@ get '/twitter/callback' do
         end
 
         followers.each_with_index{ |user, i|
-          if count == 0
+          if accessCount == 0
             userid = Comment.new
             userid.username = user_name
             userid.follower = user.name
@@ -149,7 +149,7 @@ get '/twitter/callback' do
         retry
       end
       
-      count += 1
+      accessCount += 1
 
     else
       redirect '/top'
