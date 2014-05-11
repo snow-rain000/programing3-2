@@ -20,7 +20,7 @@
     </div>
     
       
-    <div class="container">
+    
     <div class="row">
       <div class="col-7 col-sm-7 col-lg-7">
         <h2>BBS</h2>              
@@ -28,12 +28,16 @@
           <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example">
             <ul>
               <% @comments.each do |comment| %>
-              <li data-id="<%= comment.id %>">
-                <%= comment.body %>
+                <li data-id="<%= comment.id %>">
+                <% if comment.body.nil? then %>
+                  <% break %>
+                <% else %>
+                  <%= comment.body %>
                 <span class="deleteCmd">
                   <a href="#" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus-sign"></i> delete</a>
                 </span><hr>
-              </li>
+              <% end %>
+                </li>
 	      <% end %>
             </ul>
           </div>
@@ -69,16 +73,16 @@
         
       </div><!--/span-->
       <div class="col-12 col-sm-12 col-lg-12">
-        <h2>follower</h2>
-        <p><a href="follower">リンク1</a></p>
+        <h2>Heading</h2>
+        <p><a href="test1">リンク1</a></p>
         <p><a href="test2">リンク2</a></p>
         <p><a href="test3">リンク3</a></p>
+
         <div style="max-height:370px; overflow:auto;">
           <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example">
            <ul>
               <% @comments.each do |comment| %>
               <li data-id="<%= comment.id %>">
-                <%= comment.proimage %>
                 <%= comment.follower %>
                 <hr>
               </li>
@@ -86,6 +90,7 @@
             </ul>
           </div>
         </div>
+
         
       </div><!--/span-->
       <div class="col-12 col-sm-12 col-lg-12">
