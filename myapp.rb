@@ -118,7 +118,7 @@ get '/twitter/callback' do
 
       followers = []
       begin
-        uname = uid.name
+        user_name = uid.name
         follower_ids = client.follower_ids("#{uid.screen_name}").to_a
         loop_count = (follower_ids.size - 1) / 100 + 1
         loop_count.times do
