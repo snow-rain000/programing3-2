@@ -155,7 +155,7 @@ get '/twitter/callback' do
       redirect '/top'
     end
 
-    puts user.name
+    puts uid.name
     puts access_token.secret 
     puts "---------------"
 
