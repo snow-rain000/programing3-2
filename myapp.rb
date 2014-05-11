@@ -1,10 +1,12 @@
 # myapp.rb
+require 'sqlite3'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'active_record'
 require 'oauth'
 require 'rubygems'
 require 'twitter'
+require 'pp'
 set :server, 'webrick' 
 set :bind, '0.0.0.0'
 set :environment, :production
@@ -17,8 +19,10 @@ ActiveRecord::Base.establish_connection(
 class Comment < ActiveRecord::Base
 end
 
+# make instance of database
+db = SQLite3::Database.new("bbs.db")
+
 # validation Session
-#enable :sessions
 use Rack::Session::Cookie, :secret => SecureRandom.hex(32),
                   :expire_after => 60*60 # 1 min
  
@@ -26,6 +30,9 @@ use Rack::Session::Cookie, :secret => SecureRandom.hex(32),
 YOUR_CONSUMER_KEY    = "YVNVCrq9Q0O2bXyVcQ5Rw"
 YOUR_CONSUMER_SECRET = "dqBJcs2YxiiodtN32KTaZlcTWHiThDHwfkryos8ilo"
  
+# define access count
+accessCount = 0
+
 def oauth_consumer
   return OAuth::Consumer.new(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET, :site => "https://api.twitter.com")
 end
@@ -95,7 +102,6 @@ get '/twitter/callback' do
     raise
   end
 
-
 # login
     client = Twitter::REST::Client.new do |config|
         config.consumer_key        = YOUR_CONSUMER_KEY
@@ -107,16 +113,48 @@ get '/twitter/callback' do
     puts "---------------"
     
     if session[:AcountName].nil? then
-      user = client.user
-      session[:AcountName] = user.name
-      puts session[:AcountName]
+      uid = client.user
+      session[:AcountName] = uid.name
+
+      followers = []
+      begin
+        uname = uid.name
+        follower_ids = client.follower_ids("#{uid.screen_name}").to_a
+        loop_count = (follower_ids.size - 1) / 100 + 1
+        loop_count.times do
+          ids = follower_ids.pop(100)
+          accounts_temp = client.users(ids)
+          followers.concat(accounts_temp)
+        end
+
+        followers.each_with_index{ |user, i|
+          if count == 0
+            userid = Comment.new
+            userid.username = user_name
+            userid.follower = user.name
+            userid.save
+          end
+          
+          db.execute("select * from comments where follower = '#{user.name}'") do |row|
+            if row[3] != user.name
+              userid = Comment.new
+              userid.username = user_name
+              userid.follower = user.name
+              userid.save
+            end
+          end
+        }
+       rescue Twitter::Error::TooManyRequests => error
+         sleep error.rate_limit.reset_in
+        retry
+      end
+      
+      count += 1
+
     else
       redirect '/top'
     end
-    user_name = user.name
-    comment = Comment.new
-    comment.username = user_name
-    comment.save
+
     puts user.name
     puts access_token.secret 
     puts "---------------"
