@@ -33,7 +33,10 @@ end
 # top page
 get '/' do
 #   "<html><body><a href='/twitter/auth'>Twitter access start!!</a></body></html>"
-  erb :testIndex
+  if session[:AcountName].nil? then
+    erb :testIndex
+  else
+    erb :bbs
 end
 
 get '/top' do
