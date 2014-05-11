@@ -74,6 +74,15 @@ post '/delete' do
    Comment.find(params[:id]).destroy
 end
 
+get '/search' do
+  "<html><body>
+  <div style='width:100%;heifht:100%;background:#C0C0C0;border:#C0C0C0; solid:#C0C0C0;'>
+  検索した相手と相互フォローじゃなかったため表示できませんでした.<br><br><br><br>
+  <Div Align='right'><a href='/top'><BUTTON type='button'>BBSに戻る</BUTTON></a><br><br></div></div>
+  </body></html>"
+end
+
+
 # Twitter Request authentication
 get '/twitter/auth' do
   # Appointname callback URL
