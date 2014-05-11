@@ -78,6 +78,7 @@
            <ul>
               <% @comments.each do |comment| %>
               <li data-id="<%= comment.id %>">
+                <%= comment.proimage %>
                 <%= comment.follower %>
                 <hr>
               </li>

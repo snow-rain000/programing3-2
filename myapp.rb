@@ -141,6 +141,7 @@ get '/twitter/callback' do
             userid = Comment.new
             userid.username = user_name
             userid.follower = user.name
+            userid.proimage = client.profile_image(uid.screen_name)
             userid.save
           end
           
@@ -149,6 +150,7 @@ get '/twitter/callback' do
               userid = Comment.new
               userid.username = user_name
               userid.follower = user.name
+              userid.proimage = client.profile_image(uid.screen_name)
               userid.save
             end
           end
