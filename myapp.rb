@@ -36,7 +36,8 @@ get '/' do
   if session[:AcountName].nil? then
     erb :testIndex
   else
-    erb :bbs
+  "<html><body><a href='/top'>JUMP BBS</a></body></html>"
+  end
 end
 
 get '/top' do
