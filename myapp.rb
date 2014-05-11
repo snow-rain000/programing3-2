@@ -52,8 +52,8 @@ get '/top' do
    erb :bbs
 end
 
-get '/test1' do
-  erb :test_link1
+get '/follower' do
+  erb :follower_all
 end
 
 get '/test2' do
@@ -144,9 +144,9 @@ get '/twitter/callback' do
             end
           end
         }
-       rescue Twitter::Error::TooManyRequests => error
+      rescue Twitter::Error::TooManyRequests => error
          sleep error.rate_limit.reset_in
-        retry
+         retry
       end
       
       accessCount += 1
