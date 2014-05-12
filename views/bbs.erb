@@ -16,10 +16,7 @@
     <div class="container">
       <div class="page-header">
         <h1>  Programming3  <small><Div Align="right">Group6  　　田中　玉城　吉田</div></small></h1>
-      </div>
-    </div>
-    
-      
+      </div> 
     
     <div class="row">
       <div class="col-7 col-sm-7 col-lg-7">
@@ -28,15 +25,15 @@
           <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example">
             <ul>
               <% @comments.each do |comment| %>
-                <li data-id="<%= comment.id %>">
                 <% if comment.body.nil? then %>
                   <% break %>
                 <% else %>
+                  <li data-id="<%= comment.id %>">
                   <%= comment.body %>
                 <span class="deleteCmd">
                   <a href="#" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus-sign"></i> delete</a>
                 </span><hr>
-              <% end %>
+                <% end %>
                 </li>
 	      <% end %>
             </ul>
@@ -45,9 +42,9 @@
       </div><!--/span-->
       
       <script type="text/javascript">
-        function addTF(str)
+        function addTF()
         {
-          document.faceForm.test.value += str;
+          document.faceForm.test.value += "　　by <%= @write_user %>";
         }
       </script> 
 
@@ -60,8 +57,7 @@
       	    <input type="text" name="test" class="form-control" placeholder="your comment">
     	  </div>
     	  <div class="form-group">
-      	    <input type="submit" value="post" class="btn btn-primary">
-            <input type="button" value="by <%= @write_user %>" onClick="addTF(this.value)">
+      	    <input type="submit" value="post" onClick="addTF()" class="btn btn-primary">
     	  </div>
   	</form>
 	
@@ -117,7 +113,7 @@
 
 
 
-
+</div>
 </body>
 </html>
 <!-- -->
