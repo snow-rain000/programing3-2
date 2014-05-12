@@ -138,23 +138,20 @@ get '/twitter/callback' do
         end
 
         followers.each_with_index{ |user, i|
-          if accessCount == 0
+#          if accessCount == 0
+          puts Comment.where(["username = ? and follower = ?", user_name, user.name ]).empty?
+#          puts Comment.where(["username = ? and follower = ?", user_name, user.name ]).nil?
+          if Comment.where(["username = ? and follower = ?", user_name, user.name ]).empty? then
             userid = Comment.new
             userid.username = user_name
             userid.follower = user.name
 #            userid.proimage = client.profile_image(user.screen_name)
             userid.save
           end
-          
-          db.execute("select * from comments where follower = '#{user.name}'") do |row|
-            if row[3] != user.name
-              userid = Comment.new
-              userid.username = user_name
-              userid.follower = user.name
-#              userid.proimage = client.profile_image(user.screen_name)
-              userid.save
-            end
-          end
+          #db.execute("select * from comments where follower = '#{user.name}'") do |row|
+#            if row[3] != user.name
+#            end
+#          end
         }
       rescue Twitter::Error::TooManyRequests => error
          sleep error.rate_limit.reset_in
