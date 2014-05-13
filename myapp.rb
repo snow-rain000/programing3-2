@@ -96,11 +96,10 @@ post '/search' do
   erb :test_link1
 end
 
-
 # Twitter Request authentication
 get '/twitter/auth' do
   # Appointname callback URL
-  callback_url = "http://133.13.60.164:4567/twitter/callback"
+  callback_url = "http://133.13.60.165:4567/twitter/callback"
   request_token = oauth_consumer.get_request_token(oauth_callback: callback_url)
  
   # セッションにトークンを保存
@@ -150,14 +149,13 @@ get '/twitter/callback' do
           followers.concat(accounts_temp)
         end
 
-        followers.each_with_index{ |user, i|
+        followers.each_with_index{ |follower, i|
 #          puts Comment.where(["username = ? and follower = ?", user_name, user.name ]).empty?
 #          puts Comment.where(["username = ? and follower = ?", user_name, user.name ]).nil?
-          if Follower.where(["username = ? and follower = ?", user_name, user.name ]).empty? then
+          if Follower.where(["username = ? and follower = ?", user_name, follower.name ]).empty? then
             userid = Follower.new
             userid.username = user_name
-            userid.follower = user.name
-#            userid.proimage = client.profile_image(user.screen_name)
+            userid.follower = follower.name
             userid.save
           end
         }

@@ -85,11 +85,13 @@
           <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scro\
 llspy-example">
            <ul>
-              <% @comments.each do |comment| %>
-              <li data-id="<%= comment.id %>">
-                <%= comment.follower %>
-                <hr>
-              </li>
+              <% @followers.each do |follower| %>
+                <% if @write_name == follower.username then %>
+                  <li data-id="<%= follower.id %>">
+                  <%= follower.follower %>
+                  <hr>
+                <% end %>
+                </li>
               <% end %>
             </ul>
           </div>
