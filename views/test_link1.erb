@@ -5,23 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap 101 Template</title>
-
+    
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
   </head>
   <body>
-    <h1>Hello, world!_link1</h1>
+    <div class="container">
+      <h1>Hello, world!_link1</h1>
+      
+      <div class="col-7 col-sm-7 col-lg-7">
+        <h2>BBS</h2>
+        <div style="max-height:370px; overflow:auto;">
+          <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example">
+            <ul>
+              <li>              </li>
+	      <li>          </li> 
+	      <li>          </li>
+	      <li>          </li>
+            </ul>
+          </div>
+        </div>
+      </div><!--/span-->
 
+      <script type="text/javascript">
+        function addTF()
+        {
+        document.faceForm.test.value += "　　by <%= @write_user %>";
+        }
+      </script>
+      
+      <div class="col-5 col-sm-5 col-lg-5">
+        <div class ="visible-xs"><hr></div>
+        <h2>お急ぎ連絡フォーム</h2>
+	
+	<form class="well">
+	  <label>メッセージ</label><br>
+	  <input type="text" class="span3" placeholder="u write メッセージ">
+	  <span class="help-inline">ヘルプテキスト!</span>
+	  <label class="checkbox">
+	    <input type="checkbox"> チェックする
+	  </label>
+	  <button type="submit" class="btn"> 送 信 </button>
+	</form>
+	
+      </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+      <script>
+          $('.deleteCmd').click(function() {
+            var el = $(this).parent();
+            if (confirm('are you sure to delte?')) {
+              $.post('/delete', {
+                id: el.data('id')
+                }, function() {
+                el.fadeOut(800);
+              });
+            }
+          })
+      </script>
+      
+    </div><!--/span-->
+    
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-  </body>
+</div>
+</body>
 </html>
