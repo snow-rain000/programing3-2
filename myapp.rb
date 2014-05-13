@@ -20,8 +20,12 @@ ActiveRecord::Base.establish_connection(
 class Comment < ActiveRecord::Base
 end
 
+class Follower < ActiveRecord::Base
+end
+
 # make instance of database
-db = SQLite3::Database.new("bbs.db")
+#db = SQLite3::Database.new("bbs.db")
+db = SQLite3::Database.new("follower.db")
 
 # validation Session
 use Rack::Session::Cookie, :secret => SecureRandom.hex(32),
@@ -31,9 +35,6 @@ use Rack::Session::Cookie, :secret => SecureRandom.hex(32),
 YOUR_CONSUMER_KEY    = "YVNVCrq9Q0O2bXyVcQ5Rw"
 YOUR_CONSUMER_SECRET = "dqBJcs2YxiiodtN32KTaZlcTWHiThDHwfkryos8ilo"
  
-# define access count
-accessCount = 0
-
 def oauth_consumer
   return OAuth::Consumer.new(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET, :site => "https://api.twitter.com")
 end
@@ -53,6 +54,7 @@ if session[:AcountName].nil? then
   "<html><body><a href='/'>JUMP access page</a></body></html>"
 else
   @comments = Comment.order("id desc").all
+  @followers = Follower.all
   @write_user = session[:AcountName]
   erb :bbs
 end
@@ -72,7 +74,6 @@ end
 
 post '/new' do
    Comment.create({body: params[:test]})
-   #Comment.create({:name => hoge})
    redirect '/top'
 end
 
@@ -150,28 +151,20 @@ get '/twitter/callback' do
         end
 
         followers.each_with_index{ |user, i|
-#          if accessCount == 0
-          puts Comment.where(["username = ? and follower = ?", user_name, user.name ]).empty?
+#          puts Comment.where(["username = ? and follower = ?", user_name, user.name ]).empty?
 #          puts Comment.where(["username = ? and follower = ?", user_name, user.name ]).nil?
-          if Comment.where(["username = ? and follower = ?", user_name, user.name ]).empty? then
-            userid = Comment.new
+          if Follower.where(["username = ? and follower = ?", user_name, user.name ]).empty? then
+            userid = Follower.new
             userid.username = user_name
             userid.follower = user.name
 #            userid.proimage = client.profile_image(user.screen_name)
             userid.save
           end
-          #db.execute("select * from comments where follower = '#{user.name}'") do |row|
-#            if row[3] != user.name
-#            end
-#          end
         }
       rescue Twitter::Error::TooManyRequests => error
          sleep error.rate_limit.reset_in
          retry
       end
-      
-      accessCount += 1
-
     else
       redirect '/top'
     end
