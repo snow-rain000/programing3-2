@@ -1,7 +1,9 @@
 create table comments (
     id integer primary key,
     body text,
-    username text
+    username text,
+    chat text,
+    partner text
 );
 
 create table followers (

@@ -65,7 +65,10 @@ get '/follower' do
 end
 
 get '/test2' do
-  erb :test_link2
+  @comments = Comment.order("id desc").all
+  @followers = Follower.all
+  @write_user = session[:AcountName]
+  erb :test_link1
 end
 
 get '/test3' do
