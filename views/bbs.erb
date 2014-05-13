@@ -86,7 +86,7 @@
 llspy-example">
            <ul>
               <% @followers.each do |follower| %>
-                <% if @write_name == follower.username then %>
+                <% if @write_user == follower.username then %>
                   <li data-id="<%= follower.id %>">
                   <%= follower.follower %>
                   <hr>
