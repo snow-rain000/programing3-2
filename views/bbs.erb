@@ -77,13 +77,13 @@
         
       </div><!--/span-->
       <div class="col-12 col-sm-12 col-lg-12">
-        <h2>Heading</h2>
-        <p><a href="test1">リンク1</a></p>
-        <p><a href="test2">リンク2</a></p>
-        <p><a href="test3">リンク3</a></p>
+        <hr>
+        <h2>follower</h2>
 
+        <div class="col-7 col-sm-7 col-lg-7">
         <div style="max-height:370px; overflow:auto;">
-          <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example">
+          <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scro\
+llspy-example">
            <ul>
               <% @comments.each do |comment| %>
               <li data-id="<%= comment.id %>">
@@ -94,7 +94,23 @@
             </ul>
           </div>
         </div>
+      </div>
 
+      <!--serarchボタンの場所だよ__add_textを追加する場所をコピペしたので変数とか書き換え\
+てください-->
+      <div class="col-5 col-sm-5 col-lg-5">
+        <form name="faceForm" method="post" action="/search">
+          <div class="form-group">
+            <label class="control-label" for="comment" >user search</label>
+            <input type="text" name="test" class="form-control" placeholder="your_followe\
+r">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="search"  class="btn btn-primary">
+          </div>
+        </form>
+
+      </div>
         
       </div><!--/span-->
       <div class="col-12 col-sm-12 col-lg-12">

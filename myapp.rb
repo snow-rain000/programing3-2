@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # myapp.rb
 require 'sqlite3'
 require 'sinatra'
@@ -48,9 +49,13 @@ get '/' do
 end
 
 get '/top' do
-   @comments = Comment.order("id desc").all
-   @write_user = session[:AcountName]
-   erb :bbs
+if session[:AcountName].nil? then
+  "<html><body><a href='/'>JUMP access page</a></body></html>"
+else
+  @comments = Comment.order("id desc").all
+  @write_user = session[:AcountName]
+  erb :bbs
+end
 end
 
 get '/follower' do
@@ -79,15 +84,22 @@ get '/search' do
   "<html><body>
   <div style='width:100%;heifht:100%;background:#C0C0C0;border:#C0C0C0; solid:#C0C0C0;'>
   検索した相手と相互フォローじゃなかったため表示できませんでした.<br><br><br><br>
-  <Div Align='right'><a href='/top'><BUTTON type='button'>BBSに戻る</BUTTON></a><br><br></div></div>
+  <Div Align='right'><a href='/top'><BUTTON type='button'>BBSに戻る</BUTTON></a><br><br></div>
+  </div>
   </body></html>"
+end
+#上記みたいな分岐お願い
+
+
+post '/search' do
+  erb :test_link1
 end
 
 
 # Twitter Request authentication
 get '/twitter/auth' do
   # Appointname callback URL
-  callback_url = "http://133.13.60.165:4567/twitter/callback"
+  callback_url = "http://133.13.60.164:4567/twitter/callback"
   request_token = oauth_consumer.get_request_token(oauth_callback: callback_url)
  
   # セッションにトークンを保存
