@@ -92,7 +92,7 @@ end
 # Twitter Request authentication
 get '/twitter/auth' do
   # Appointname callback URL
-  callback_url = "http://133.13.60.165:4567/twitter/callback"
+  callback_url = "http://e125721.st.ie.u-ryukyu.ac.jp:4567/twitter/callback"
   request_token = oauth_consumer.get_request_token(oauth_callback: callback_url)
  
   # セッションにトークンを保存

@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Refresh" content="10">
     <title>Pro3</title>
     
     <!-- Bootstrap -->
@@ -83,8 +82,7 @@
 
         <div class="col-7 col-sm-7 col-lg-7">
         <div style="max-height:370px; overflow:auto;">
-          <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scro\
-llspy-example">
+          <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example">
            <ul>
               <% @followers.each do |follower| %>
                 <% if @write_user == follower.username then %>
@@ -104,8 +102,7 @@ llspy-example">
         <form name="searchForm" method="post" action="/usearch">
           <div class="form-group">
             <label class="control-label" for="comment" >user search</label>
-            <input type="text" name="test" class="form-control" placeholder="your_followe\
-r">
+            <input type="text" name="test" class="form-control" placeholder="your_follower">
           </div>
           <div class="form-group">
             <input type="submit" value="search"  class="btn btn-primary">
