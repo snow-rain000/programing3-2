@@ -80,8 +80,8 @@ post '/new' do
    redirect '/top'
 end
 
-post '/message' do
-   Comment.create({chat: params[:chat]})
+post '/chat' do
+   Comment.create({chat: params[:message]})
    redirect '/test2'
 end
 
