@@ -64,15 +64,11 @@ get '/follower' do
   erb :follower_all
 end
 
-get '/test2' do
+post '/search' do
   @comments = Comment.order("id desc").all
   @followers = Follower.all
   @write_user = session[:AcountName]
   erb :test_link1
-end
-
-get '/test3' do
-  erb :test_link3
 end
 
 post '/new' do
@@ -90,9 +86,9 @@ post '/delete' do
 end
 
 
-post '/search' do
-  erb :test_link1
-end
+#post '/search' do
+#  erb :test_link1
+#end
 
 # Twitter Request authentication
 get '/twitter/auth' do
