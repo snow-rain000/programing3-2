@@ -19,34 +19,45 @@
         <div style="max-height:370px; overflow:auto;">
           <div data-spy="scroll" data-target="#navbarExample" data-offset="0" class="scrollspy-example">
             <ul>
-              <li>              </li>
-	      <li>          </li> 
-	      <li>          </li>
-	      <li>          </li>
+              <% @comments.each do |comment| %>
+                <% if comment.chat.nil? then %>
+                  <% break %>
+                <% else %>
+                  <li data-id="<%= comment.id %>">
+                  <%= comment.chat %>
+                <span class="deleteCmd">
+                  <a href="#" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus-sign"></i> delete</a>
+                </span><hr>
+                <% end %>
+                </li>
+              <% end %>
             </ul>
           </div>
         </div>
       </div><!--/span-->
-
+    
       <script type="text/javascript">
         function addTF()
         {
         document.faceForm.test.value += "　　by <%= @write_user %>";
         }
       </script>
+    </div><!-- /span-->
       
-      <div class="col-5 col-sm-5 col-lg-5">
-        <div class ="visible-xs"><hr></div>
+    <div class="col-5 col-sm-5 col-lg-5">
+      <div class ="visible-xs"><hr></div>
         <h2>お急ぎ連絡フォーム</h2>
-	
-	<form class="well">
-	  <label>メッセージ</label><br>
-	  <input type="text" class="span3" placeholder="u write メッセージ">
-	  <span class="help-inline">ヘルプテキスト!</span>
-	  <label class="checkbox">
-	    <input type="checkbox"> DM で会話通知をする
+        <form class="well" method="post" action="/message">
+          <div class="form-group">
+	    <label>メッセージ</label><br>
+	    <input type="text" name="message" class="span3" placeholder="u write メッセージ">
+            <label class="checkbox">
+            <input type="checkbox"> DM で会話通知をする
 	  </label>
-	  <button type="submit" class="btn"> 送 信 </button>
+          </div>
+          <div class="form-group">
+	    <button type="submit" value="post" onClick="addTF()" class="btn"> 送 信 </button>
+          </div> 
 	</form>
 	
       </div>

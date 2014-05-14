@@ -80,6 +80,11 @@ post '/new' do
    redirect '/top'
 end
 
+post '/message' do
+   Comment.create({chat: params[:chat]})
+   redirect '/test2'
+end
+
 post '/delete' do
    Comment.find(params[:id]).destroy
 end
