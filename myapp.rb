@@ -64,7 +64,7 @@ get '/follower' do
   erb :follower_all
 end
 
-post '/search' do
+get '/search' do
   @comments = Comment.order("id desc").all
   @followers = Follower.all
   @write_user = session[:AcountName]
@@ -78,22 +78,21 @@ end
 
 post '/chat' do
    Comment.create({chat: params[:message]})
-   redirect '/test2'
+   redirect '/search'
 end
 
 post '/delete' do
    Comment.find(params[:id]).destroy
 end
 
-
-#post '/search' do
-#  erb :test_link1
-#end
+post '/usearch' do
+   redirect '/search'
+end
 
 # Twitter Request authentication
 get '/twitter/auth' do
   # Appointname callback URL
-  callback_url = "http://133.13.60.164:4567/twitter/callback"
+  callback_url = "http://133.13.60.165:4567/twitter/callback"
   request_token = oauth_consumer.get_request_token(oauth_callback: callback_url)
  
   # セッションにトークンを保存
