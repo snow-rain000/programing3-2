@@ -32,8 +32,8 @@ use Rack::Session::Cookie, :secret => SecureRandom.hex(32),
                   :expire_after => 60*60 # 1 min
  
 # Set up Twitter API
-YOUR_CONSUMER_KEY    = "YVNVCrq9Q0O2bXyVcQ5Rw"
-YOUR_CONSUMER_SECRET = "dqBJcs2YxiiodtN32KTaZlcTWHiThDHwfkryos8ilo"
+YOUR_CONSUMER_KEY    = "your consumer key"
+YOUR_CONSUMER_SECRET = "your consumer secret"
  
 def oauth_consumer
   return OAuth::Consumer.new(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET, :site => "https://api.twitter.com")
